@@ -1,35 +1,30 @@
-import Button from './components/Button';
-import { GoBell, GoCloudDownload, GoDatabase } from 'react-icons/go';
+import Accordion from './components/Accordion';
 
 function App() {
+	const items = [
+		{
+			id: 'lk1j23',
+			label: 'Lorem ipsum dolor sit amet?',
+			content:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum explicabo voluptates suscipit temporibus tenetur, porro, quae dicta veniam sunt facere aut magnam quidem laudantium atque?',
+		},
+		{
+			id: 'asdf09',
+			label: 'Lorem ipsum dolor sit amet?',
+			content:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum explicabo voluptates suscipit temporibus tenetur, porro, quae dicta veniam sunt facere aut magnam quidem laudantium atque?',
+		},
+		{
+			id: 'puio3',
+			label: 'Lorem ipsum dolor sit amet?',
+			content:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum explicabo voluptates suscipit temporibus tenetur, porro, quae dicta veniam sunt facere aut magnam quidem laudantium atque?',
+		},
+	];
+
 	return (
 		<div className='App'>
-			<div>
-				<Button primary rounded>
-					<GoBell />
-					Click!
-				</Button>
-			</div>
-			<div>
-				<Button success rounded outline>
-					<GoCloudDownload />
-					Buy Now!
-				</Button>
-			</div>
-			<div>
-				<Button warning>
-					<GoDatabase />
-					See Deal!
-				</Button>
-			</div>
-			<div>
-				<Button danger>Click</Button>
-			</div>
-			<div>
-				<Button secondary outline>
-					Click
-				</Button>
-			</div>
+			<Accordion items={items} />
 		</div>
 	);
 }
