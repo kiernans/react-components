@@ -5,6 +5,7 @@ import AccordionPage from './pages/AccordionPage';
 import ButtonPage from './pages/ButtonPage';
 import DropdownPage from './pages/DropdownPage';
 import ModalPage from './pages/ModalPage';
+import TablePage from './pages/TablePage';
 
 function App() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,9 @@ function App() {
 				</Route>
 				<Route path='/modal'>
 					<ModalPage containerRef={containerRef} />
+				</Route>
+				<Route path='/table'>
+					<TablePage />
 				</Route>
 			</div>
 			<div ref={containerRef} className='modal-container'></div>
