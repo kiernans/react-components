@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 export type TableProps = {
 	data: Data[];
@@ -6,7 +6,7 @@ export type TableProps = {
 	keyFn: (rowData: any) => any;
 };
 
-type Data = {
+export type Data = {
 	name: string;
 	color: string;
 	score: number;

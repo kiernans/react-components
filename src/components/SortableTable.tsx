@@ -1,33 +1,13 @@
-import { useState } from 'react';
 import { GoArrowSmallDown, GoArrowSmallUp } from 'react-icons/go';
 import Table, { TableProps } from './Table';
-
-type SortOrderState = 'asc' | 'desc' | null;
-type SortByState = string | null;
+import useSorting, { SortByState, SortOrderState } from '../hooks/useSorting';
 
 const SortableTable = (props: TableProps) => {
 	const { config, data } = props;
-	const [sortOrder, setSortOrder] = useState<SortOrderState>(null);
-	const [sortBy, setSortBy] = useState<SortByState>(null);
-
-	const handleClick = (label: string) => {
-		if (sortBy && label !== sortBy) {
-			setSortOrder('asc');
-			setSortBy(label);
-			return;
-		}
-
-		if (sortOrder === null) {
-			setSortOrder('asc');
-			setSortBy(label);
-		} else if (sortOrder === 'asc') {
-			setSortOrder('desc');
-			setSortBy(label);
-		} else if (sortOrder === 'desc') {
-			setSortOrder(null);
-			setSortBy(null);
-		}
-	};
+	const { sortOrder, sortBy, sortedData, setSortColumn } = useSorting(
+		data,
+		config
+	);
 
 	const updatedConfig = config.map((column) => {
 		if (!column.sortValue) {
@@ -39,7 +19,7 @@ const SortableTable = (props: TableProps) => {
 			header: () => (
 				<th
 					className='cursor-pointer hover:bg-gray-100'
-					onClick={() => handleClick(column.label)}
+					onClick={() => setSortColumn(column.label)}
 				>
 					<div className='flex items-center select-none'>
 						{getIcons(column.label, sortBy, sortOrder)}
@@ -49,31 +29,6 @@ const SortableTable = (props: TableProps) => {
 			),
 		};
 	});
-
-	// Only sort data if sortOrder and sortBy are null
-	// Make a copy of 'data' prop
-	// Find the correct sortValue function and use to sort
-	let sortedData = data;
-	if (sortOrder && sortBy) {
-		const { sortValue } =
-			config.find((column) => column.label === sortBy) || {};
-		sortedData = [...data].sort((a, b) => {
-			let valueA, valueB;
-			if (sortValue) {
-				// Apply sorting function to transform values to expected form
-				valueA = sortValue(a);
-				valueB = sortValue(b);
-			}
-
-			const reverseOrder = sortOrder === 'asc' ? 1 : -1;
-
-			if (typeof valueA === 'string') {
-				return valueA.localeCompare(valueB) * reverseOrder;
-			} else {
-				return (valueA - valueB) * reverseOrder;
-			}
-		});
-	}
 
 	return (
 		<div>
