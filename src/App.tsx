@@ -6,6 +6,7 @@ import ButtonPage from './pages/ButtonPage';
 import DropdownPage from './pages/DropdownPage';
 import ModalPage from './pages/ModalPage';
 import TablePage from './pages/TablePage';
+import CounterPage from './pages/CounterPage';
 
 function App() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +29,9 @@ function App() {
 				</Route>
 				<Route path='/table'>
 					<TablePage />
+				</Route>
+				<Route path='/counter'>
+					<CounterPage initialCount={5} />
 				</Route>
 			</div>
 			<div ref={containerRef} className='modal-container'></div>
